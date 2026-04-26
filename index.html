@@ -564,6 +564,20 @@ em.accent{
   padding:14px 10px;
   display:flex; flex-direction:column; gap:9px;
 }
+
+/* Hero image styling */
+.hero-image{
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border-radius:var(--radius-lg);
+  border:1px solid var(--border-strong);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.06) inset,
+    0 40px 80px -30px rgba(0,0,0,.9),
+    0 0 0 1px rgba(59,130,246,.12);
+}
+
 .mock-mobile .notch{
   position:absolute; top:6px; left:50%; transform:translateX(-50%);
   width:34%; height:14px; border-radius:8px;
@@ -1462,60 +1476,9 @@ footer{
       </div>
     </div>
 
-    <!-- Hero visual: composed mockup, no external images required -->
+    <!-- Hero visual: image -->
     <div class="hero-visual reveal" aria-hidden="true">
-      <div class="mock mock-desktop">
-        <div class="mock-bar">
-          <i></i><i></i><i></i>
-          <span class="url">drapsicologa.com.br</span>
-        </div>
-        <div class="mock-body">
-          <div class="hero-tile">
-            <div class="h-text">
-              <span class="lbl">Psicologia Clínica</span>
-              <span class="ln"></span>
-              <span class="ln s"></span>
-              <span class="ln t"></span>
-              <span class="pill">Agendar consulta</span>
-            </div>
-            <div class="portrait"></div>
-          </div>
-          <div class="grid-3">
-            <div class="tile"><span class="ic"></span><span class="ll"></span><span class="ll x"></span></div>
-            <div class="tile"><span class="ic"></span><span class="ll"></span><span class="ll x"></span></div>
-            <div class="tile"><span class="ic"></span><span class="ll"></span><span class="ll x"></span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mock mock-mobile">
-        <div class="screen">
-          <span class="notch"></span>
-          <div class="av"></div>
-          <span class="hd"></span>
-          <span class="sb"></span>
-          <span class="sb" style="width:50%"></span>
-          <div class="row" style="margin-top:auto">
-            <span class="b p"></span>
-            <span class="b"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="spec spec-1">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 11-12h-7l0-8z"/></svg></span>
-        <div>
-          <strong>Performance otimizada</strong>
-          <span>Mobile-first · LCP rápido</span>
-        </div>
-      </div>
-      <div class="spec spec-2">
-        <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
-        <div>
-          <strong>SEO básico incluso</strong>
-          <span>Estrutura para o Google</span>
-        </div>
-      </div>
+      <img src="/assets/portfolio/imagem-hero.webp" alt="Psicóloga em atendimento profissional" width="600" height="700" loading="eager" class="hero-image" />
     </div>
   </div>
 </section>
