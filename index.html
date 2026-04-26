@@ -795,118 +795,152 @@ section{padding:var(--section-y) 0; position:relative}
 }
 .benefit p{font-size:14px; color:var(--text-3); line-height:1.6}
 
-/* =====================  PORTFOLIO  ===================== */
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:20px;
-}
-.work{
+/* =====================  PORTFOLIO CAROUSEL  ===================== */
+.portfolio-section{
+  padding-top:clamp(60px,7vw,100px);
+  padding-bottom:var(--section-y);
   position:relative;
-  border-radius:var(--radius-lg);
   overflow:hidden;
+}
+.portfolio-bridge{
+  position:absolute; top:0; left:0; right:0; height:220px;
+  background:linear-gradient(180deg, rgba(37,99,255,.07) 0%, transparent 100%);
+  pointer-events:none;
+}
+.carousel-viewport{
+  position:relative; width:100%; overflow:hidden;
+  margin-top:clamp(32px,4vw,52px);
+  cursor:grab; user-select:none;
+}
+.carousel-viewport.dragging{cursor:grabbing}
+.carousel-track{
+  display:flex; gap:24px;
+  padding:12px calc(var(--gutter) + 20px) 24px;
+  width:max-content;
+  will-change:transform;
+}
+.carousel-card{
+  flex-shrink:0; width:clamp(280px,28vw,380px);
+  border-radius:var(--radius-lg); overflow:hidden;
   border:1px solid var(--border);
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  transition:transform .4s ease, border-color .4s ease;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  pointer-events:auto;
 }
-.work:hover{transform:translateY(-4px); border-color:var(--border-blue)}
-.work-frame{
-  background:rgba(255,255,255,.03);
-  border-bottom:1px solid var(--border);
-  padding:10px 14px;
-  display:flex; align-items:center; gap:6px;
+.carousel-card:hover{
+  transform:translateY(-6px); border-color:var(--border-blue);
+  box-shadow:0 24px 60px -20px rgba(37,99,255,.3);
 }
-.work-frame i{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.15)}
-.work-frame .u{
-  margin-left:auto;
-  font-family:var(--font-mono); font-size:10px; color:var(--text-3);
+.card-img-wrap{
+  position:relative; aspect-ratio:16/10; overflow:hidden;
+  background:linear-gradient(180deg,#0B1426,#060914);
+  cursor:pointer;
 }
-.work-img{
-  aspect-ratio:16/10;
-  position:relative; overflow:hidden;
-  background:linear-gradient(180deg, #0B1426, #050811);
+.card-thumb{
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  display:block; transition:transform .45s ease;
 }
-/* Variations */
-.work-img.v1{
-  background:
-    radial-gradient(80% 60% at 30% 30%, rgba(37,99,255,.25), transparent 70%),
-    radial-gradient(60% 50% at 80% 80%, rgba(11,27,58,.7), transparent 70%),
-    linear-gradient(180deg, #0E1426, #060914);
+.carousel-card:hover .card-thumb{transform:scale(1.03)}
+.card-view-btn{
+  position:absolute; bottom:14px; left:50%;
+  transform:translateX(-50%) translateY(8px);
+  opacity:0; pointer-events:none; z-index:2;
+  transition:opacity .25s ease, transform .25s ease;
+  white-space:nowrap;
 }
-.work-img.v2{
-  background:
-    radial-gradient(70% 60% at 70% 30%, rgba(96,165,250,.18), transparent 70%),
-    radial-gradient(60% 50% at 20% 80%, rgba(29,78,216,.25), transparent 70%),
-    linear-gradient(180deg, #0B1426, #060914);
+.carousel-card:hover .card-view-btn{
+  opacity:1; transform:translateX(-50%) translateY(0);
+  pointer-events:auto;
 }
-.work-img.v3{
-  background:
-    radial-gradient(80% 60% at 50% 30%, rgba(59,130,246,.2), transparent 70%),
-    linear-gradient(180deg, #060A18, #04060E);
+.card-body{padding:20px 20px 22px}
+.card-cat{
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--blue-200); display:block; margin-bottom:7px;
 }
-.work-img::before{
-  content:""; position:absolute; inset:14px;
-  border-radius:8px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0)) padding-box,
-    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0)) border-box;
-  border:1px solid transparent;
-  background-clip:padding-box, border-box;
+.card-title{
+  font-family:var(--font-display); font-size:18px; font-weight:500;
+  color:#fff; margin-bottom:6px; line-height:1.2;
 }
-.work-img .layout{
-  position:absolute; inset:24px;
-  display:flex; flex-direction:column; gap:8px;
+.card-desc{font-size:13px; color:var(--text-3); line-height:1.5}
+.carousel-fade{
+  position:absolute; top:0; bottom:0; width:120px;
+  pointer-events:none; z-index:3;
 }
-.work-img .top{
-  display:flex; justify-content:space-between; align-items:center;
-}
-.work-img .top .lg{
-  font-family:var(--font-display); font-size:11px; color:#fff; opacity:.8;
-}
-.work-img .top .nav{display:flex; gap:6px}
-.work-img .top .nav i{
-  display:block; width:18px; height:3px; border-radius:2px;
-  background:rgba(255,255,255,.3);
-}
-.work-img .hero-line{
-  height:8px; width:80%; border-radius:3px;
-  background:rgba(255,255,255,.6);
-  margin-top:14px;
-}
-.work-img .hero-line.s{height:5px; width:55%; background:rgba(255,255,255,.2)}
-.work-img .hero-line.t{height:5px; width:40%; background:rgba(255,255,255,.15)}
-.work-img .blocks{
-  margin-top:auto;
-  display:grid; grid-template-columns:repeat(3,1fr); gap:6px;
-}
-.work-img .blocks i{
-  display:block; height:22px; border-radius:4px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-}
-.work-img .blocks i.p{background:linear-gradient(180deg,#3B82F6,#1D4ED8); border-color:transparent}
+.carousel-fade-left{left:0; background:linear-gradient(90deg,var(--bg-0),transparent)}
+.carousel-fade-right{right:0; background:linear-gradient(270deg,var(--bg-0),transparent)}
 
-.work-body{padding:24px 22px}
-.work-body .cat{
-  font-family:var(--font-mono);
-  font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--blue-200);
-  margin-bottom:8px;
+/* =====================  LIGHTBOX  ===================== */
+.lightbox{
+  display:none; position:fixed; inset:0; z-index:100;
+  align-items:center; justify-content:center;
 }
-.work-body h3{
-  font-family:var(--font-display);
-  font-size:20px; font-weight:500;
-  color:#fff; margin-bottom:8px;
+.lightbox.open{display:flex}
+.lb-backdrop{
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.86);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  cursor:pointer;
 }
-.work-body p{font-size:13.5px; color:var(--text-3); line-height:1.5; margin-bottom:18px}
-.work-body .link{
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:13px; font-weight:500;
-  color:var(--blue-200);
-  transition:gap .2s ease;
+.lb-panel{
+  position:relative; z-index:2;
+  width:min(1100px,94vw); max-height:88vh;
+  background:#05070D; border:1px solid var(--border-strong);
+  border-radius:18px; overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow:0 40px 100px -30px rgba(0,0,0,.95), 0 0 0 1px rgba(59,130,246,.12);
 }
-.work-body .link:hover{gap:10px}
-.work-body .link svg{width:14px; height:14px}
+.lb-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px; border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.025); flex-shrink:0;
+}
+.lb-header-info{display:flex; flex-direction:column; gap:2px}
+.lb-header h4{
+  font-family:var(--font-display); font-size:16px; font-weight:500;
+  color:#fff; margin:0;
+}
+.lb-header .lb-cat{
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--blue-200);
+}
+.lb-close{
+  width:36px; height:36px; border-radius:10px;
+  background:var(--surface); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--text-2); transition:background .2s, color .2s;
+  cursor:pointer; flex-shrink:0;
+}
+.lb-close:hover{background:var(--surface-strong); color:#fff}
+.lb-close svg{width:16px; height:16px}
+.lb-img-container{
+  overflow-y:auto; overflow-x:hidden; flex:1;
+  background:#05070D; -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+}
+.lb-img-container img{width:100%; height:auto; display:block}
+.lb-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px; border-top:1px solid var(--border);
+  background:rgba(255,255,255,.02); flex-shrink:0;
+}
+.lb-nav-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; font-weight:500; color:var(--text-2);
+  padding:8px 14px; border-radius:999px;
+  background:var(--surface); border:1px solid var(--border);
+  transition:background .2s, color .2s, border-color .2s; cursor:pointer;
+}
+.lb-nav-btn:hover{background:var(--surface-strong); color:#fff; border-color:var(--border-blue)}
+.lb-nav-btn svg{width:14px; height:14px}
+.lb-nav-btn:disabled{opacity:.3; cursor:default; pointer-events:none}
+.lb-counter{font-family:var(--font-mono); font-size:12px; color:var(--text-3); letter-spacing:.1em}
+@media(max-width:480px){
+  .lb-panel{max-height:94vh; border-radius:12px; width:98vw}
+  .lb-header{padding:12px 14px}
+  .lb-nav{padding:10px 14px}
+  .lb-nav-btn{padding:8px 10px; gap:5px; font-size:12px}
+}
 
 /* =====================  PLANS  ===================== */
 .plans-grid{
@@ -1300,7 +1334,8 @@ footer{
   .problem-grid{grid-template-columns:1fr; gap:48px}
   .problem-img{position:relative; top:auto; max-width:480px; margin:0 auto; width:100%}
   .benefits-grid{grid-template-columns:repeat(2,1fr)}
-  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+  .carousel-card{width:clamp(260px,36vw,340px)}
+  .carousel-fade{width:80px}
   .plans-grid{grid-template-columns:1fr; gap:18px}
   .step{grid-template-columns:80px 1fr; gap:20px; padding:24px}
   .step .arrow{display:none}
@@ -1320,7 +1355,8 @@ footer{
   .nav-cta .btn:not(.menu-toggle){display:none}
   .nav-cta .btn.menu-toggle{display:inline-flex}
   .benefits-grid{grid-template-columns:1fr}
-  .portfolio-grid{grid-template-columns:1fr}
+  .carousel-card{width:260px}
+  .carousel-fade{width:50px}
   .diff-grid{grid-template-columns:1fr}
   .diff{border-right:none !important; border-bottom:1px solid var(--border) !important}
   .diff:last-child{border-bottom:none !important}
@@ -1484,6 +1520,193 @@ footer{
   </div>
 </section>
 
+<!-- ============== PORTFOLIO ============== -->
+<section id="portfolio" class="portfolio-section" aria-labelledby="portfolio-title">
+  <div class="portfolio-bridge" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Modelos e portfólio</span>
+      <h2 id="portfolio-title">
+        Veja como seu site pode ficar<br>
+        <em class="accent">antes mesmo de contratar</em>.
+      </h2>
+      <p class="lead">
+        Modelos visuais criados para transmitir clareza, confiança e autoridade profissional desde o primeiro acesso.
+      </p>
+    </div>
+  </div>
+
+  <div class="carousel-viewport" role="region" aria-label="Carrossel de modelos de sites">
+    <div class="carousel-track" id="carouselTrack">
+
+      <article class="carousel-card" data-index="0">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto01.webp"
+               alt="Screenshot de site one page para psicóloga clínica"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="0"
+                  aria-label="Ver modelo completo: Psicóloga Clínica">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Clínica</h3>
+          <p class="card-desc">Site objetivo com apresentação profissional, abordagem e contato rápido.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="1">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto02.webp"
+               alt="Screenshot de site para psicóloga especialista em TCC"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="1"
+                  aria-label="Ver modelo completo: Psicóloga TCC">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga TCC</h3>
+          <p class="card-desc">Modelo com foco em clareza, confiança e apresentação da abordagem terapêutica.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="2">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto03.webp"
+               alt="Screenshot de site com blog para consultório de psicologia"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="2"
+                  aria-label="Ver modelo completo: Consultório de Psicologia">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site + Blog</span>
+          <h3 class="card-title">Consultório de Psicologia</h3>
+          <p class="card-desc">Estrutura completa com páginas institucionais, especialidades e blog.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="3">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto04.webp"
+               alt="Screenshot de site para psicóloga com atendimento online"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="3"
+                  aria-label="Ver modelo completo: Psicóloga Online">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Online</h3>
+          <p class="card-desc">Página voltada para atendimento online, agendamento e apresentação profissional.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="4">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto05.webp"
+               alt="Screenshot de modelo de site para psicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="4"
+                  aria-label="Ver modelo completo: Projeto 05">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Infantil</h3>
+          <p class="card-desc">Design acolhedor com foco em atendimento infantil e comunicação com os responsáveis.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="5">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto06.webp"
+               alt="Screenshot de modelo de site para psicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="5"
+                  aria-label="Ver modelo completo: Projeto 06">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga Analítica</h3>
+          <p class="card-desc">Presença digital sofisticada com apresentação da abordagem junguiana e contato.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="6">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto07.webp"
+               alt="Screenshot de modelo de site para psicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="6"
+                  aria-label="Ver modelo completo: Projeto 07">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Terapia de Casal</h3>
+          <p class="card-desc">Site focado em atendimento de casais, com linguagem empática e formulário de contato.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="7">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto08.webp"
+               alt="Screenshot de modelo de site para psicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="7"
+                  aria-label="Ver modelo completo: Projeto 08">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site + Blog</span>
+          <h3 class="card-title">Neuropsicóloga</h3>
+          <p class="card-desc">Estrutura profissional com blog para conteúdo especializado e fortalecimento de autoridade.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="8">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto09.webp"
+               alt="Screenshot de modelo de site para psicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="8"
+                  aria-label="Ver modelo completo: Projeto 09">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Clínica de Psicologia</h3>
+          <p class="card-desc">Identidade visual institucional com múltiplos profissionais, especialidades e agendamento.</p>
+        </div>
+      </article>
+
+    </div>
+    <div class="carousel-fade carousel-fade-left" aria-hidden="true"></div>
+    <div class="carousel-fade carousel-fade-right" aria-hidden="true"></div>
+  </div>
+</section>
+
 <!-- ============== PROBLEM ============== -->
 <section aria-labelledby="problem-title">
   <span class="section-divider" aria-hidden="true"></span>
@@ -1583,86 +1806,6 @@ footer{
         <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20V10M5 20v-6M19 20V4"/></svg></div>
         <h3>Mais estrutura para crescer</h3>
         <p>No plano com blog, você cria base para publicar conteúdos e fortalecer sua autoridade orgânica.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============== PORTFOLIO ============== -->
-<section id="portfolio" aria-labelledby="portfolio-title">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Portfólio</span>
-      <h2 id="portfolio-title">
-        Projetos com aparência séria, moderna<br>
-        e construída para <em class="accent">gerar confiança</em>.
-      </h2>
-      <p class="lead">
-        Exemplos visuais de como sua presença digital pode se apresentar com mais clareza, autoridade e sofisticação.
-      </p>
-    </div>
-
-    <div class="portfolio-grid">
-      <article class="work reveal">
-        <div class="work-frame"><i></i><i></i><i></i><span class="u">drapaulamendes.com.br</span></div>
-        <div class="work-img v1" role="img" aria-label="Mockup de site para psicóloga clínica">
-          <div class="layout">
-            <div class="top"><span class="lg">Dra. Paula Mendes</span><div class="nav"><i></i><i></i><i></i></div></div>
-            <span class="hero-line"></span>
-            <span class="hero-line s"></span>
-            <span class="hero-line t"></span>
-            <div class="blocks"><i class="p"></i><i></i><i></i></div>
-          </div>
-        </div>
-        <div class="work-body">
-          <span class="cat">One Page</span>
-          <h3>Site para Psicóloga Clínica</h3>
-          <p>Página profissional com apresentação, abordagem, serviços e contato pelo WhatsApp.</p>
-          <a href="#planos" class="link">Visualizar projeto
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="work reveal">
-        <div class="work-frame"><i></i><i></i><i></i><span class="u">consultorio-vivere.com.br</span></div>
-        <div class="work-img v2" role="img" aria-label="Mockup de site institucional para consultório de psicologia">
-          <div class="layout">
-            <div class="top"><span class="lg">Vivere · Consultório</span><div class="nav"><i></i><i></i><i></i><i></i></div></div>
-            <span class="hero-line"></span>
-            <span class="hero-line s"></span>
-            <div class="blocks"><i></i><i class="p"></i><i></i></div>
-          </div>
-        </div>
-        <div class="work-body">
-          <span class="cat">Site 6 páginas</span>
-          <h3>Consultório de Psicologia</h3>
-          <p>Estrutura institucional com páginas de especialidades, sobre, contato e blog.</p>
-          <a href="#planos" class="link">Visualizar projeto
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </article>
-
-      <article class="work reveal">
-        <div class="work-frame"><i></i><i></i><i></i><span class="u">helena-online.com.br</span></div>
-        <div class="work-img v3" role="img" aria-label="Mockup de site para psicóloga online">
-          <div class="layout">
-            <div class="top"><span class="lg">Helena · Psicologia Online</span><div class="nav"><i></i><i></i><i></i></div></div>
-            <span class="hero-line"></span>
-            <span class="hero-line s"></span>
-            <span class="hero-line t"></span>
-            <div class="blocks"><i></i><i></i><i class="p"></i></div>
-          </div>
-        </div>
-        <div class="work-body">
-          <span class="cat">One Page</span>
-          <h3>Psicóloga Online</h3>
-          <p>Site focado em atendimento online, clareza da abordagem e agendamento rápido.</p>
-          <a href="#planos" class="link">Visualizar projeto
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
       </article>
     </div>
   </div>
@@ -1981,6 +2124,36 @@ footer{
   </div>
 </section>
 
+<!-- ============== LIGHTBOX ============== -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="lb-backdrop"></div>
+  <div class="lb-panel">
+    <div class="lb-header">
+      <div class="lb-header-info">
+        <h4 id="lbTitle"></h4>
+        <span class="lb-cat" id="lbCat"></span>
+      </div>
+      <button class="lb-close" aria-label="Fechar visualização">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="lb-img-container" id="lbImgContainer">
+      <img id="lbImg" src="" alt="" />
+    </div>
+    <div class="lb-nav">
+      <button class="lb-nav-btn" id="lbPrev" aria-label="Projeto anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Anterior
+      </button>
+      <span class="lb-counter" id="lbCounter"></span>
+      <button class="lb-nav-btn" id="lbNext" aria-label="Próximo projeto">
+        Próximo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <!-- ============== FOOTER ============== -->
@@ -2070,6 +2243,139 @@ footer{
   } else {
     revealEls.forEach(function(el){ el.classList.add('in'); });
   }
+
+  // =====================  CAROUSEL  =====================
+  (function(){
+    var track = document.getElementById('carouselTrack');
+    if(!track) return;
+    var viewport = track.closest('.carousel-viewport');
+    var origCards = Array.from(track.querySelectorAll('.carousel-card'));
+    origCards.forEach(function(card){
+      var clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden','true');
+      track.appendChild(clone);
+    });
+    var pos = 0, paused = false, isDragging = false;
+    var dragStartX = 0, dragStartPos = 0, resumeTimer = null;
+    var speed = 0.5;
+    function getSetWidth(){
+      var gap = 24;
+      return origCards.length * (origCards[0].offsetWidth + gap);
+    }
+    function pauseFor(){
+      paused = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(function(){ paused = false; }, 3500);
+    }
+    function tick(){
+      if(!paused && !isDragging){
+        pos += speed;
+        var sw = getSetWidth();
+        if(pos >= sw) pos -= sw;
+      }
+      track.style.transform = 'translateX(-' + pos.toFixed(2) + 'px)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    viewport.addEventListener('mouseenter', function(){ paused = true; clearTimeout(resumeTimer); });
+    viewport.addEventListener('mouseleave', function(){ pauseFor(); });
+    viewport.addEventListener('mousedown', function(e){
+      if(e.button !== 0) return;
+      isDragging = true; dragStartX = e.clientX; dragStartPos = pos;
+      viewport.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!isDragging) return;
+      var dx = dragStartX - e.clientX, sw = getSetWidth();
+      pos = dragStartPos + dx;
+      if(pos < 0) pos += sw;
+      if(pos >= sw) pos -= sw;
+    });
+    window.addEventListener('mouseup', function(){
+      if(!isDragging) return;
+      isDragging = false; viewport.classList.remove('dragging'); pauseFor();
+    });
+    var touchStartX = 0, touchStartPos = 0;
+    viewport.addEventListener('touchstart', function(e){
+      touchStartX = e.touches[0].clientX; touchStartPos = pos;
+      paused = true; clearTimeout(resumeTimer);
+    },{passive:true});
+    viewport.addEventListener('touchmove', function(e){
+      var dx = touchStartX - e.touches[0].clientX, sw = getSetWidth();
+      pos = touchStartPos + dx;
+      if(pos < 0) pos += sw;
+      if(pos >= sw) pos -= sw;
+    },{passive:true});
+    viewport.addEventListener('touchend', function(){ pauseFor(); },{passive:true});
+  })();
+
+  // =====================  LIGHTBOX  =====================
+  (function(){
+    var data = [
+      {title:'Psicóloga Clínica',cat:'One Page',full:'/assets/portfolio/projeto01full.webp',alt:'Site one page para psicóloga clínica'},
+      {title:'Psicóloga TCC',cat:'Site profissional',full:'/assets/portfolio/projeto02full.webp',alt:'Site para psicóloga especialista em TCC'},
+      {title:'Consultório de Psicologia',cat:'Site + Blog',full:'/assets/portfolio/projeto03full.webp',alt:'Site com blog para consultório de psicologia'},
+      {title:'Psicóloga Online',cat:'One Page',full:'/assets/portfolio/projeto04full.webp',alt:'Site para psicóloga com atendimento online'},
+      {title:'Psicóloga Infantil',cat:'One Page',full:'/assets/portfolio/projeto05full.webp',alt:'Site para psicóloga infantil'},
+      {title:'Psicóloga Analítica',cat:'Site profissional',full:'/assets/portfolio/projeto06full.webp',alt:'Site para psicóloga de abordagem analítica'},
+      {title:'Terapia de Casal',cat:'One Page',full:'/assets/portfolio/projeto07full.webp',alt:'Site para atendimento de casais'},
+      {title:'Neuropsicóloga',cat:'Site + Blog',full:'/assets/portfolio/projeto08full.webp',alt:'Site com blog para neuropsicóloga'},
+      {title:'Clínica de Psicologia',cat:'Site profissional',full:'/assets/portfolio/projeto09full.webp',alt:'Site institucional para clínica de psicologia'}
+    ];
+    var lb = document.getElementById('lightbox');
+    if(!lb) return;
+    var lbImg = document.getElementById('lbImg');
+    var lbTitle = document.getElementById('lbTitle');
+    var lbCat = document.getElementById('lbCat');
+    var lbPrev = document.getElementById('lbPrev');
+    var lbNext = document.getElementById('lbNext');
+    var lbCounter = document.getElementById('lbCounter');
+    var lbImgCont = document.getElementById('lbImgContainer');
+    var current = 0;
+    function render(){
+      var d = data[current];
+      lbTitle.textContent = d.title;
+      lbCat.textContent = d.cat;
+      lbImg.src = d.full;
+      lbImg.alt = d.alt;
+      lbCounter.textContent = (current + 1) + ' / ' + data.length;
+      if(lbImgCont) lbImgCont.scrollTop = 0;
+    }
+    function open(idx){
+      current = ((idx % data.length) + data.length) % data.length;
+      render();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lb.querySelector('.lb-close').focus();
+    }
+    function close(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+    document.addEventListener('click', function(e){
+      var btn = e.target.closest('[data-lightbox]');
+      if(btn){ e.preventDefault(); open(parseInt(btn.getAttribute('data-lightbox'), 10)); return; }
+      var wrap = e.target.closest('.card-img-wrap');
+      if(wrap){
+        var card = wrap.closest('.carousel-card');
+        if(card && !card.getAttribute('aria-hidden')){
+          var idx = parseInt(card.getAttribute('data-index'), 10);
+          if(!isNaN(idx)) open(idx);
+        }
+      }
+    });
+    lbPrev.addEventListener('click', function(){ current = (current - 1 + data.length) % data.length; render(); });
+    lbNext.addEventListener('click', function(){ current = (current + 1) % data.length; render(); });
+    lb.querySelector('.lb-close').addEventListener('click', close);
+    lb.querySelector('.lb-backdrop').addEventListener('click', close);
+    document.addEventListener('keydown', function(e){
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft'){ current = (current - 1 + data.length) % data.length; render(); }
+      if(e.key === 'ArrowRight'){ current = (current + 1) % data.length; render(); }
+    });
+  })();
 
   // Close other FAQ items when one opens (single-open accordion)
   var faqItems = document.querySelectorAll('.faq-item');
