@@ -846,7 +846,7 @@ section{padding:var(--section-y) 0; position:relative}
   border:1px solid var(--border);
   background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
   transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
-  pointer-events:auto;
+  pointer-events:auto; cursor:pointer;
 }
 .carousel-card:hover{
   transform:translateY(-6px); border-color:var(--border-blue);
@@ -855,7 +855,11 @@ section{padding:var(--section-y) 0; position:relative}
 .card-img-wrap{
   position:relative; aspect-ratio:16/10; overflow:hidden;
   background:linear-gradient(180deg,#0B1426,#060914);
-  cursor:pointer;
+}
+.card-img-wrap::after{
+  content:''; position:absolute; inset:auto 0 0 0; height:65%;
+  background:linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%);
+  pointer-events:none; z-index:1;
 }
 .card-thumb{
   width:100%; height:100%; object-fit:cover; object-position:top center;
@@ -864,14 +868,13 @@ section{padding:var(--section-y) 0; position:relative}
 .carousel-card:hover .card-thumb{transform:scale(1.03)}
 .card-view-btn{
   position:absolute; bottom:14px; left:50%;
-  transform:translateX(-50%) translateY(8px);
-  opacity:0; pointer-events:none; z-index:2;
-  transition:opacity .25s ease, transform .25s ease;
+  transform:translateX(-50%);
+  opacity:.88; pointer-events:auto; z-index:2;
   white-space:nowrap;
+  transition:opacity .2s ease, transform .2s ease;
 }
 .carousel-card:hover .card-view-btn{
-  opacity:1; transform:translateX(-50%) translateY(0);
-  pointer-events:auto;
+  opacity:1; transform:translateX(-50%) translateY(-2px);
 }
 .card-body{padding:20px 20px 22px}
 .card-cat{
@@ -893,7 +896,7 @@ section{padding:var(--section-y) 0; position:relative}
 
 /* =====================  LIGHTBOX  ===================== */
 .lightbox{
-  display:none; position:fixed; inset:0; z-index:100;
+  display:none; position:fixed; inset:0; z-index:1000;
   align-items:center; justify-content:center;
 }
 .lightbox.open{display:flex}
@@ -1511,64 +1514,298 @@ footer{
 
       <article class="carousel-card" data-index="0">
         <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto01.webp"
-               alt="Screenshot de site one page para psicóloga clínica"
+          <img src="/assets/portfolio/projeto20.webp"
+               alt="Screenshot de modelo de site para psicóloga"
                width="900" height="562" loading="lazy" class="card-thumb" />
           <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="0"
-                  aria-label="Ver modelo completo: Psicóloga Clínica">
+                  aria-label="Ver modelo completo: Psicóloga Perinatal">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
           </button>
         </div>
         <div class="card-body">
           <span class="card-cat">One Page</span>
-          <h3 class="card-title">Psicóloga Clínica</h3>
-          <p class="card-desc">Site objetivo com apresentação profissional, abordagem e contato rápido.</p>
+          <h3 class="card-title">Psicóloga Perinatal</h3>
+          <p class="card-desc">Site acolhedor com foco em maternidade, gestação e suporte emocional pós-parto.</p>
         </div>
       </article>
 
       <article class="carousel-card" data-index="1">
         <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto02.webp"
-               alt="Screenshot de site para psicóloga especialista em TCC"
+          <img src="/assets/portfolio/projeto19.webp"
+               alt="Screenshot de modelo de site para psicólogo clínico"
                width="900" height="562" loading="lazy" class="card-thumb" />
           <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="1"
-                  aria-label="Ver modelo completo: Psicóloga TCC">
+                  aria-label="Ver modelo completo: Psicólogo Clínico">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
           </button>
         </div>
         <div class="card-body">
           <span class="card-cat">Site profissional</span>
-          <h3 class="card-title">Psicóloga TCC</h3>
-          <p class="card-desc">Modelo com foco em clareza, confiança e apresentação da abordagem terapêutica.</p>
+          <h3 class="card-title">Psicólogo Clínico</h3>
+          <p class="card-desc">Apresentação clara de abordagem, formação e formas de contato para novos pacientes.</p>
         </div>
       </article>
 
       <article class="carousel-card" data-index="2">
         <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto03.webp"
-               alt="Screenshot de site com blog para consultório de psicologia"
+          <img src="/assets/portfolio/projeto18.webp"
+               alt="Screenshot de modelo de site para psicóloga escolar"
                width="900" height="562" loading="lazy" class="card-thumb" />
           <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="2"
-                  aria-label="Ver modelo completo: Consultório de Psicologia">
+                  aria-label="Ver modelo completo: Psicóloga Escolar">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Escolar</h3>
+          <p class="card-desc">Site objetivo para atuação no contexto educacional, com linguagem acessível e contato direto.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="3">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto17.webp"
+               alt="Screenshot de modelo de site para psicoterapia breve"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="3"
+                  aria-label="Ver modelo completo: Psicoterapia Breve">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicoterapia Breve</h3>
+          <p class="card-desc">Estrutura focada em apresentar o método, benefícios e agendamento de forma direta.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="4">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto16.webp"
+               alt="Screenshot de modelo de site para psicóloga comportamental"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="4"
+                  aria-label="Ver modelo completo: Psicóloga Comportamental">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Comportamental</h3>
+          <p class="card-desc">Visual limpo e direto, com ênfase na abordagem cognitivo-comportamental e contato rápido.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="5">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto15.webp"
+               alt="Screenshot de modelo de site para psicóloga de adultos"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="5"
+                  aria-label="Ver modelo completo: Psicóloga de Adultos">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga de Adultos</h3>
+          <p class="card-desc">Presença digital elegante com foco no público adulto, abordagem e formas de atendimento.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="6">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto14.webp"
+               alt="Screenshot de modelo de site para consultório multidisciplinar"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="6"
+                  aria-label="Ver modelo completo: Consultório Multidisciplinar">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
           </button>
         </div>
         <div class="card-body">
           <span class="card-cat">Site + Blog</span>
-          <h3 class="card-title">Consultório de Psicologia</h3>
-          <p class="card-desc">Estrutura completa com páginas institucionais, especialidades e blog.</p>
+          <h3 class="card-title">Consultório Multidisciplinar</h3>
+          <p class="card-desc">Site institucional com blog, equipe de profissionais e múltiplas especialidades.</p>
         </div>
       </article>
 
-      <article class="carousel-card" data-index="3">
+      <article class="carousel-card" data-index="7">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto13.webp"
+               alt="Screenshot de modelo de site para psicóloga sistêmica"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="7"
+                  aria-label="Ver modelo completo: Psicóloga Sistêmica">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Sistêmica</h3>
+          <p class="card-desc">Design que transmite acolhimento, com apresentação da abordagem familiar e sistêmica.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="8">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto12.webp"
+               alt="Screenshot de modelo de site para psicóloga de adolescentes"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="8"
+                  aria-label="Ver modelo completo: Psicóloga Adolescentes">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga Adolescentes</h3>
+          <p class="card-desc">Visual moderno e acessível, focado no público jovem e na comunicação com responsáveis.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="9">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto11.webp"
+               alt="Screenshot de modelo de site para psicóloga gestalt"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="9"
+                  aria-label="Ver modelo completo: Psicóloga Gestalt">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Gestalt</h3>
+          <p class="card-desc">Site com identidade visual humanista, apresentação da abordagem e contato pelo WhatsApp.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="10">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto10.webp"
+               alt="Screenshot de modelo de site para psicóloga humanista"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="10"
+                  aria-label="Ver modelo completo: Psicóloga Humanista">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga Humanista</h3>
+          <p class="card-desc">Design caloroso e editorial, refletindo os valores da psicologia centrada na pessoa.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="11">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto09.webp"
+               alt="Screenshot de site institucional para clínica de psicologia"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="11"
+                  aria-label="Ver modelo completo: Clínica de Psicologia">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Clínica de Psicologia</h3>
+          <p class="card-desc">Identidade visual institucional com múltiplos profissionais, especialidades e agendamento.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="12">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto08.webp"
+               alt="Screenshot de site com blog para neuropsicóloga"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="12"
+                  aria-label="Ver modelo completo: Neuropsicóloga">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site + Blog</span>
+          <h3 class="card-title">Neuropsicóloga</h3>
+          <p class="card-desc">Estrutura profissional com blog para conteúdo especializado e fortalecimento de autoridade.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="13">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto07.webp"
+               alt="Screenshot de site para atendimento de casais"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="13"
+                  aria-label="Ver modelo completo: Terapia de Casal">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Terapia de Casal</h3>
+          <p class="card-desc">Site com linguagem empática voltado ao atendimento de casais e formulário de contato.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="14">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto06.webp"
+               alt="Screenshot de site para psicóloga analítica"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="14"
+                  aria-label="Ver modelo completo: Psicóloga Analítica">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">Site profissional</span>
+          <h3 class="card-title">Psicóloga Analítica</h3>
+          <p class="card-desc">Presença digital sofisticada com apresentação da abordagem junguiana e contato.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="15">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto05.webp"
+               alt="Screenshot de site para psicóloga infantil"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="15"
+                  aria-label="Ver modelo completo: Psicóloga Infantil">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Infantil</h3>
+          <p class="card-desc">Design acolhedor com foco em atendimento infantil e comunicação com os responsáveis.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="16">
         <div class="card-img-wrap">
           <img src="/assets/portfolio/projeto04.webp"
                alt="Screenshot de site para psicóloga com atendimento online"
                width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="3"
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="16"
                   aria-label="Ver modelo completo: Psicóloga Online">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
@@ -1581,93 +1818,57 @@ footer{
         </div>
       </article>
 
-      <article class="carousel-card" data-index="4">
+      <article class="carousel-card" data-index="17">
         <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto05.webp"
-               alt="Screenshot de modelo de site para psicóloga"
+          <img src="/assets/portfolio/projeto03.webp"
+               alt="Screenshot de site com blog para consultório de psicologia"
                width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="4"
-                  aria-label="Ver modelo completo: Projeto 05">
-            Ver modelo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <span class="card-cat">One Page</span>
-          <h3 class="card-title">Psicóloga Infantil</h3>
-          <p class="card-desc">Design acolhedor com foco em atendimento infantil e comunicação com os responsáveis.</p>
-        </div>
-      </article>
-
-      <article class="carousel-card" data-index="5">
-        <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto06.webp"
-               alt="Screenshot de modelo de site para psicóloga"
-               width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="5"
-                  aria-label="Ver modelo completo: Projeto 06">
-            Ver modelo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <span class="card-cat">Site profissional</span>
-          <h3 class="card-title">Psicóloga Analítica</h3>
-          <p class="card-desc">Presença digital sofisticada com apresentação da abordagem junguiana e contato.</p>
-        </div>
-      </article>
-
-      <article class="carousel-card" data-index="6">
-        <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto07.webp"
-               alt="Screenshot de modelo de site para psicóloga"
-               width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="6"
-                  aria-label="Ver modelo completo: Projeto 07">
-            Ver modelo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
-          </button>
-        </div>
-        <div class="card-body">
-          <span class="card-cat">One Page</span>
-          <h3 class="card-title">Terapia de Casal</h3>
-          <p class="card-desc">Site focado em atendimento de casais, com linguagem empática e formulário de contato.</p>
-        </div>
-      </article>
-
-      <article class="carousel-card" data-index="7">
-        <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto08.webp"
-               alt="Screenshot de modelo de site para psicóloga"
-               width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="7"
-                  aria-label="Ver modelo completo: Projeto 08">
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="17"
+                  aria-label="Ver modelo completo: Consultório de Psicologia">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
           </button>
         </div>
         <div class="card-body">
           <span class="card-cat">Site + Blog</span>
-          <h3 class="card-title">Neuropsicóloga</h3>
-          <p class="card-desc">Estrutura profissional com blog para conteúdo especializado e fortalecimento de autoridade.</p>
+          <h3 class="card-title">Consultório de Psicologia</h3>
+          <p class="card-desc">Estrutura completa com páginas institucionais, especialidades e blog.</p>
         </div>
       </article>
 
-      <article class="carousel-card" data-index="8">
+      <article class="carousel-card" data-index="18">
         <div class="card-img-wrap">
-          <img src="/assets/portfolio/projeto09.webp"
-               alt="Screenshot de modelo de site para psicóloga"
+          <img src="/assets/portfolio/projeto02.webp"
+               alt="Screenshot de site para psicóloga especialista em TCC"
                width="900" height="562" loading="lazy" class="card-thumb" />
-          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="8"
-                  aria-label="Ver modelo completo: Projeto 09">
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="18"
+                  aria-label="Ver modelo completo: Psicóloga TCC">
             Ver modelo
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
           </button>
         </div>
         <div class="card-body">
           <span class="card-cat">Site profissional</span>
-          <h3 class="card-title">Clínica de Psicologia</h3>
-          <p class="card-desc">Identidade visual institucional com múltiplos profissionais, especialidades e agendamento.</p>
+          <h3 class="card-title">Psicóloga TCC</h3>
+          <p class="card-desc">Modelo com foco em clareza, confiança e apresentação da abordagem terapêutica.</p>
+        </div>
+      </article>
+
+      <article class="carousel-card" data-index="19">
+        <div class="card-img-wrap">
+          <img src="/assets/portfolio/projeto01.webp"
+               alt="Screenshot de site one page para psicóloga clínica"
+               width="900" height="562" loading="lazy" class="card-thumb" />
+          <button class="card-view-btn btn btn-ghost btn-sm" data-lightbox="19"
+                  aria-label="Ver modelo completo: Psicóloga Clínica">
+            Ver modelo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M9 21H3v-6"/></svg>
+          </button>
+        </div>
+        <div class="card-body">
+          <span class="card-cat">One Page</span>
+          <h3 class="card-title">Psicóloga Clínica</h3>
+          <p class="card-desc">Site objetivo com apresentação profissional, abordagem e contato rápido.</p>
         </div>
       </article>
 
@@ -2271,15 +2472,26 @@ footer{
   // =====================  LIGHTBOX  =====================
   (function(){
     var data = [
-      {title:'Psicóloga Clínica',cat:'One Page',full:'/assets/portfolio/projeto01full.webp',alt:'Site one page para psicóloga clínica'},
-      {title:'Psicóloga TCC',cat:'Site profissional',full:'/assets/portfolio/projeto02full.webp',alt:'Site para psicóloga especialista em TCC'},
-      {title:'Consultório de Psicologia',cat:'Site + Blog',full:'/assets/portfolio/projeto03full.webp',alt:'Site com blog para consultório de psicologia'},
-      {title:'Psicóloga Online',cat:'One Page',full:'/assets/portfolio/projeto04full.webp',alt:'Site para psicóloga com atendimento online'},
-      {title:'Psicóloga Infantil',cat:'One Page',full:'/assets/portfolio/projeto05full.webp',alt:'Site para psicóloga infantil'},
-      {title:'Psicóloga Analítica',cat:'Site profissional',full:'/assets/portfolio/projeto06full.webp',alt:'Site para psicóloga de abordagem analítica'},
-      {title:'Terapia de Casal',cat:'One Page',full:'/assets/portfolio/projeto07full.webp',alt:'Site para atendimento de casais'},
+      {title:'Psicóloga Perinatal',cat:'One Page',full:'/assets/portfolio/projeto20full.webp',alt:'Site para psicóloga perinatal'},
+      {title:'Psicólogo Clínico',cat:'Site profissional',full:'/assets/portfolio/projeto19full.webp',alt:'Site para psicólogo clínico'},
+      {title:'Psicóloga Escolar',cat:'One Page',full:'/assets/portfolio/projeto18full.webp',alt:'Site para psicóloga escolar'},
+      {title:'Psicoterapia Breve',cat:'Site profissional',full:'/assets/portfolio/projeto17full.webp',alt:'Site para psicoterapia breve'},
+      {title:'Psicóloga Comportamental',cat:'One Page',full:'/assets/portfolio/projeto16full.webp',alt:'Site para psicóloga comportamental'},
+      {title:'Psicóloga de Adultos',cat:'Site profissional',full:'/assets/portfolio/projeto15full.webp',alt:'Site para psicóloga de adultos'},
+      {title:'Consultório Multidisciplinar',cat:'Site + Blog',full:'/assets/portfolio/projeto14full.webp',alt:'Site para consultório multidisciplinar'},
+      {title:'Psicóloga Sistêmica',cat:'One Page',full:'/assets/portfolio/projeto13full.webp',alt:'Site para psicóloga sistêmica'},
+      {title:'Psicóloga Adolescentes',cat:'Site profissional',full:'/assets/portfolio/projeto12full.webp',alt:'Site para psicóloga de adolescentes'},
+      {title:'Psicóloga Gestalt',cat:'One Page',full:'/assets/portfolio/projeto11full.webp',alt:'Site para psicóloga gestalt'},
+      {title:'Psicóloga Humanista',cat:'Site profissional',full:'/assets/portfolio/projeto10full.webp',alt:'Site para psicóloga humanista'},
+      {title:'Clínica de Psicologia',cat:'Site profissional',full:'/assets/portfolio/projeto09full.webp',alt:'Site institucional para clínica de psicologia'},
       {title:'Neuropsicóloga',cat:'Site + Blog',full:'/assets/portfolio/projeto08full.webp',alt:'Site com blog para neuropsicóloga'},
-      {title:'Clínica de Psicologia',cat:'Site profissional',full:'/assets/portfolio/projeto09full.webp',alt:'Site institucional para clínica de psicologia'}
+      {title:'Terapia de Casal',cat:'One Page',full:'/assets/portfolio/projeto07full.webp',alt:'Site para atendimento de casais'},
+      {title:'Psicóloga Analítica',cat:'Site profissional',full:'/assets/portfolio/projeto06full.webp',alt:'Site para psicóloga analítica'},
+      {title:'Psicóloga Infantil',cat:'One Page',full:'/assets/portfolio/projeto05full.webp',alt:'Site para psicóloga infantil'},
+      {title:'Psicóloga Online',cat:'One Page',full:'/assets/portfolio/projeto04full.webp',alt:'Site para psicóloga com atendimento online'},
+      {title:'Consultório de Psicologia',cat:'Site + Blog',full:'/assets/portfolio/projeto03full.webp',alt:'Site com blog para consultório de psicologia'},
+      {title:'Psicóloga TCC',cat:'Site profissional',full:'/assets/portfolio/projeto02full.webp',alt:'Site para psicóloga especialista em TCC'},
+      {title:'Psicóloga Clínica',cat:'One Page',full:'/assets/portfolio/projeto01full.webp',alt:'Site one page para psicóloga clínica'}
     ];
     var lb = document.getElementById('lightbox');
     if(!lb) return;
@@ -2313,15 +2525,10 @@ footer{
       lbImg.src = '';
     }
     document.addEventListener('click', function(e){
-      var btn = e.target.closest('[data-lightbox]');
-      if(btn){ e.preventDefault(); open(parseInt(btn.getAttribute('data-lightbox'), 10)); return; }
-      var wrap = e.target.closest('.card-img-wrap');
-      if(wrap){
-        var card = wrap.closest('.carousel-card');
-        if(card && !card.getAttribute('aria-hidden')){
-          var idx = parseInt(card.getAttribute('data-index'), 10);
-          if(!isNaN(idx)) open(idx);
-        }
+      var card = e.target.closest('.carousel-card');
+      if(card && !card.getAttribute('aria-hidden')){
+        var idx = parseInt(card.getAttribute('data-index'), 10);
+        if(!isNaN(idx)) open(idx);
       }
     });
     lbPrev.addEventListener('click', function(){ current = (current - 1 + data.length) % data.length; render(); });
